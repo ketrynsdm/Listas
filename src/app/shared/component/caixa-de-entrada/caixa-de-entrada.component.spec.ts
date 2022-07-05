@@ -25,4 +25,9 @@ describe('CaixaDeEntradaComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('Botão esta adcionando item', () => {
+    expect(component).toBeTruthy();
+  });
+
+  
 });

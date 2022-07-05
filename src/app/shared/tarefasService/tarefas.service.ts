@@ -9,7 +9,7 @@ export class TarefasService {
     lista: string[] = [];
     private subject = new Subject<string[]>();
 
-    listar(): Observable<string[]> { 
+    listar(): Observable<string[]> {
         return this.subject.asObservable().pipe();
     }
 
@@ -20,16 +20,13 @@ export class TarefasService {
     }
 
     excluir(dado: string): void {
-        this.lista.filter(item => item !== dado);
-        // console.log(dado);
-        // console.log('hola', this.lista.filter(item => item !== dado));
-        this.lista = []; 
-        console.log('saiu');
-        this.lista.splice(1, 1);
-        this.subject.next(this.lista);
-        
-        
-        
+        try {
+            this.lista = this.lista.filter(item => item !== dado);
+        } catch (error) {} finally {
+            this.subject.next(this.lista);
+        }
+
+
     }
 
 }
