@@ -1,0 +1,8 @@
+<form [formGroup]="form" (ngSubmit)="Adicionar()">
+    <input formControlName="item" type="text" placeholder="Digite um tarefa" aria-label="default input example">
+    <button [disabled]="form.invalid" (click)="Adicionar()" type="submit">Adicionar</button>
+</form>
+
+<app-lista [lista]="lista">
+    <!-- <app-item></app-item> -->
+</app-lista>
