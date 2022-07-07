@@ -20,8 +20,7 @@ export class ListaComponent implements OnInit {
     ngOnInit(): void {
     }
     
-    deletar() {
-      // ...Executar processo de deletar item da lista;
+    listas() {
       this.listar.emit('');
     }
 

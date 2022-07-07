@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, SimpleChange } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { TarefasService } from 'src/app/shared/tarefasService/tarefas.service';
 import { FormBuilder } from '@angular/forms';
@@ -10,12 +10,12 @@ import { FormBuilder } from '@angular/forms';
 })
 export class ItemComponent implements OnInit {
   @Input() item: string = '';
+  @Output() listar= new EventEmitter<string>();
 
   lista: any = ['']
   subject: any;
 
   constructor(
-    private tarefasService: TarefasService,
     private fb: FormBuilder
   ) { }
 
@@ -28,7 +28,9 @@ export class ItemComponent implements OnInit {
   }
 
   excluir(item: string) {
-    this.tarefasService.excluir(item);
+    this.listar.emit(item);
+    console.log(this.listar.emit(item));
+    
 
   }
 

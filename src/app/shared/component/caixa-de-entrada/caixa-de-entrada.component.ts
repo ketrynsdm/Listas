@@ -11,7 +11,7 @@ import { TarefasService } from '../../tarefasService/tarefas.service';
 
 export class CaixaDeEntradaComponent implements OnInit {
 
-  lista: any = []
+  lista: any = ['teeeeste']
 
   form = this.formBuilder.group({
     item: ['', Validators.required]
@@ -27,18 +27,17 @@ export class CaixaDeEntradaComponent implements OnInit {
     
     ngOnInit(): void {
       this.tarefasService.listar().subscribe(data => {
-        console.log(data)
         this.lista = data;
       })
     }
     
     Adicionar(): void {
-      // const item: any = this.form.getRawValue();
       const { item }: { item: string | null } = this.form.getRawValue()
       if(item !== null){
         this.tarefasService.adicionar(item);
         this.form.reset();
       }
+      
       
   }
   

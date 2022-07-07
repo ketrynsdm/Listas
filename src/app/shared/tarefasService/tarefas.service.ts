@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, pipe, Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -7,26 +7,21 @@ import { Observable, Subject } from 'rxjs';
 export class TarefasService {
 
     lista: string[] = [];
-    private subject = new Subject<string[]>();
+    private subject = new Subject<string>();
 
-    listar(): Observable<string[]> {
-        return this.subject.asObservable().pipe();
+    listar(): Observable<string> {
+        return this.subject.asObservable();
     }
 
     adicionar(dado: string): void {
-        console.log(dado);
         this.lista.push(dado);
-        this.subject.next(this.lista);
+        this.subject.next(dado);
     }
 
-    excluir(dado: string): void {
-        try {
-            this.lista = this.lista.filter(item => item !== dado);
-        } catch (error) {} finally {
-            this.subject.next(this.lista);
-        }
-
-
-    }
+    async excluir(dado: string) {
+        const lista: any = await this.subject.toPromise();
+        const novaLista  = lista.filter((item: string) => item !== dado);
+        this.subject.next(novaLista);
+      }
 
 }
